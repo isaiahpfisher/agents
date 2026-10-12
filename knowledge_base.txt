@@ -3,42 +3,6 @@ Oklahoma Christian University
 Source: Course syllabus. Answer only from the information below.
 
 ==================================================
-COURSE INFORMATION
-==================================================
-Course name: AI Technologies
-Course number: CMSC-3123-01
-Semester: Fall 2026
-Classroom: PEC 231
-Meeting times: Monday, Wednesday, Friday, 10:00-10:50
-The course is normally offered every fall semester.
-
-==================================================
-INSTRUCTOR AND CONTACT INFORMATION
-==================================================
-Instructor: Daniel Griffin, Instructor of Computer Science
-Office: PEC 211
-Email: daniel.griffin@oc.edu
-Phone: 405.425.5468
-
-Office hours:
-- MW (Monday and Wednesday): 12:30-1:30 and 2:30-4:30
-- TH: 9:00-11:00 and 2:30-4:30
-- Or by appointment
-
-==================================================
-MISSION STATEMENTS AND TEACHING PHILOSOPHY
-==================================================
-OC Mission Statement:
-Oklahoma Christian University educates, mentors, and inspires learners to fulfill their God-given potential.
-
-Computer Science Department Mission:
-The mission of the Computer Science program is to prepare graduates for a great life and successful Computer Science career by developing in students a foundation of Computer Science principles, knowledge, and skills, all applied with a Christian worldview.
-
-Christian Worldview and Teaching Philosophy:
-The instructor believes everyone has a moral imperative to excel in their vocation; for students, this means excellence in university. This benefits the student through future opportunities and also benefits those impacted by their work, especially given the wide reach of computing. This aligns with Colossians 3:23: "Whatever your task, put yourselves into it, as done for the Lord."
-AI is a powerful tool that can be used for good and for ill. Learning how to use and wield it is valuable today, and a Christian worldview helps promote its uses for humanity.
-
-==================================================
 COURSE DESCRIPTION
 ==================================================
 An introduction to AI and its applications in business and society. The course has three major objectives:
@@ -46,12 +10,6 @@ An introduction to AI and its applications in business and society. The course h
 2. Apply AI tools for real-world problem-solving.
 3. Evaluate the ethical and societal impacts of AI technologies.
 Topics include retrieval-augmented generation (RAG), generative models, and multimodal AI, with a focus on business value and industry use cases.
-
-Prerequisites: There are no required or recommended prerequisites.
-
-Major requirements this course fulfills:
-- Required upper-division course for Computer Science with AI majors.
-- Computer Science upper-division elective for other emphases.
 
 ==================================================
 COURSE OUTCOMES
@@ -76,7 +34,7 @@ Mapping of Program Learning Outcomes to University Learning Outcomes:
 - Career & Vocation: Christian Worldview; Critical, Creative & Structured Thinking; Knowledge & Applications; Effective Communication; Christ-like Virtues
 
 ==================================================
-GRADING
+GRADING STANDARDS
 ==================================================
 Course grade weights:
 - Quizzes: 15%
@@ -96,11 +54,13 @@ Grading scale:
 - F: below 60%
 
 ==================================================
-MATERIALS AND REQUIRED TECHNOLOGY
+TEXTBOOK
 ==================================================
-Textbook:
 Mollick, Ethan. Co-Intelligence: Living and Working with AI. Portfolio, 2024. ISBN 978-0593716717.
 
+==================================================
+REQUIRED EDUCATIONAL TECHNOLOGY
+==================================================
 Google Drive:
 Most resources and assignments require access to Google Drive. Students have an account connected to their OC email with unlimited storage. To access OC Google Drive, go to www.drive.google.com and sign in with OC credentials.
 
@@ -113,15 +73,13 @@ Laptop:
   - Wireless internet capable
 
 ==================================================
-COURSE POLICIES
+AI POLICY
 ==================================================
-Generative AI policy:
 The course encourages students to explore generative AI. Most assignments will require it, because learning to use automated tools successfully and ethically is an emerging skill.
 
-Attendance, tardiness, and leaving early:
-No official tally of absences or tardiness directly affects the grade. However, attendance affects classroom participation grades and quiz grades.
-
-Late assignment policy:
+==================================================
+LATE POLICY
+==================================================
 All assignments are turned in online, so there should be little excuse for late work due to technical or logistical reasons. Late deductions:
 - Up to 1 day (24 hours) late: -10%
 - 1 day to less than 7 days late: -20%
@@ -131,89 +89,8 @@ All assignments are turned in online, so there should be little excuse for late 
 The instructor may grant exceptions or reductions on a case-by-case basis.
 Assignments are not accepted after the last day of the course (December 10).
 
-Inclement weather policy:
-If a class period or exam is missed because campus is closed for bad weather, the professor will determine a reasonable makeup plan based on what was missed.
-
-Campus closing policy:
-Because most students and professors live on or very near campus, the University does not suspend classes for bad weather unless the conditions pose unnecessary risk to faculty, staff, and students. Students prevented from attending class because of road conditions should notify their professor of the cause, and the absence will be treated as being for an acceptable reason.
-
-Emergency statement:
-In an emergency, faculty, staff, and students signed up for OC Campus Messenger (oc.edu/notify) will be notified by text, email, or Twitter. If an emergency occurs during class, the instructor will tell students present the appropriate procedures.
-
-Additional OC policies:
-Policies on academic honesty, copyright/fair use, proctoring, sources of help, the Americans with Disabilities Act (ADA), and sexual misconduct (Title IX) are in the OC Syllabus Addendum:
+==================================================
+ACADEMIC HONESTY AND THE ADA
+==================================================
+Policies on academic honesty and the Americans with Disabilities Act (ADA) are in the OC Syllabus Addendum:
 https://drive.google.com/file/d/1A7CwC3ZBoQIfqLSd7nZPr_Rry3JWCelz/view
-
-==================================================
-COURSE SCHEDULE (TENTATIVE)
-==================================================
-The schedule is tentative and may change to accommodate guest presenters and student needs.
-
-Unit 1
-- Week 0, Fri Aug 21: Syllabus; AI Landscape
-- Week 1, Mon Aug 24: Model Selection Criteria
-- Week 1, Wed Aug 26: Prompt Engineering
-- Week 1, Fri Aug 28: Prompt Engineering - Lab
-- Week 2, Mon Aug 31: Prompt Portfolio - Lab
-- Week 2, Wed Sep 2: Prompt Portfolio - Presentation
-
-Unit 2
-- Week 2, Fri Sep 4: Ollama; Terminal Basics
-- Week 3, Mon Sep 7: Labor Day (no class)
-- Week 3, Wed Sep 9: Web Scraping; Research & Data Analytics
-- Week 3, Fri Sep 11: Data Analysis - Lab
-- Week 4, Mon Sep 14: Data Visualization
-- Week 4, Wed Sep 16: Data Analysis - Lab
-- Week 4, Fri Sep 18: Data Analysis - Presentation
-- Week 5, Mon Sep 21: Data Analysis - Presentation
-
-Unit 3
-- Week 5, Wed Sep 23: Fine-tuning
-- Week 5, Fri Sep 25: Terminal - Lab
-- Week 6, Mon Sep 28: Fine-tune - Lab
-- Week 6, Wed Sep 30: Fine-tune - Lab
-
-Unit 4
-- Week 6, Fri Oct 2: Agents
-- Week 7, Mon Oct 5: Headless Agents
-- Week 7, Wed Oct 7: Agent Architectures; System Prompts, Knowledge Base
-- Week 7, Fri Oct 9: Email Agent - Lab
-- Week 8, Mon Oct 12: Email Agent - Lab
-
-Unit 6 (Final Project begins)
-- Week 8, Wed Oct 14: Final Project Intro; Website & App AI
-- Week 8, Fri Oct 16: Fall Break (no class)
-- Week 9, Mon Oct 19: RAG
-- Week 9, Wed Oct 21: Final Project Proposal (1-page proposal due)
-- Week 9, Fri Oct 23: Final Project - Lab
-- Week 10, Mon Oct 26: Final Project - Lab
-
-Unit 5
-- Week 10, Wed Oct 28: Image Generation
-- Week 10, Fri Oct 30: Media Generation
-- Week 11, Mon Nov 2: Social Campaign Strategy
-- Week 11, Wed Nov 4: Campaign - Lab
-- Week 11, Fri Nov 6: Campaign - Lab
-- Week 12, Mon Nov 9: Campaign - Lab
-- Week 12, Wed Nov 11: Campaign - Presentation
-- Week 12, Fri Nov 13: Campaign - Presentation
-
-Unit 6 (continued)
-- Week 13, Mon Nov 16: Ethics & Societal Impact
-- Week 13, Wed Nov 18: AI Engineering & Industry Futures
-- Week 13, Fri Nov 20: Final Project - Lab
-- Week 14: Thanksgiving Break (no class)
-- Week 15, Mon Nov 30: Final Project - Lab
-- Week 15, Wed Dec 2: Final Project - Presentation
-- Week 15, Fri Dec 4: Wrap-up; Final Project - Presentation
-- Week 16, Wed Dec 9, 10:10-12:00: Final Project - Presentation
-- Thu Dec 10: Last day to submit work
-
-Key dates:
-- First class: Friday, August 21
-- Labor Day, no class: Monday, September 7
-- Final Project Proposal (1-page) due: Wednesday, October 21
-- Fall Break, no class: Friday, October 16
-- Thanksgiving Break, no class: Week 14
-- Final presentation session: Wednesday, December 9, 10:10-12:00
-- Last day to submit work: Thursday, December 10

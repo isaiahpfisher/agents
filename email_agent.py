@@ -8,7 +8,7 @@ Rules:
   Partial match/unsure  -> "A team member will follow up."
   No match              -> "I am unable to answer your question on that topic."
 
-Only emails from ALLOWED_SENDER are answered. Handled emails get the Gmail
+Only emails from ALLOWED_SENDERS are answered. Handled emails get the Gmail
 label "AutoReplied" so they are never answered twice; partial matches also
 get "NeedsFollowUp".
 
@@ -56,7 +56,13 @@ load_env_file(Path(__file__).with_name(".env"))
 GMAIL_ADDRESS = os.environ.get("GMAIL_ADDRESS", "").strip()
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
 
-ALLOWED_SENDER = os.environ.get("ALLOWED_SENDER", "").strip().lower()
+# Comma-separated list. The old single-address ALLOWED_SENDER name still works.
+ALLOWED_SENDERS = sorted({
+    addr.strip().lower()
+    for addr in (os.environ.get("ALLOWED_SENDERS")
+                 or os.environ.get("ALLOWED_SENDER", "")).split(",")
+    if addr.strip()
+})
 
 KNOWLEDGE_BASE_FILE = Path(__file__).with_name("knowledge_base.txt")
 
@@ -230,13 +236,13 @@ def decide_reply(system_prompt, kb_text, subject, body):
 
 # ----------------------------- Gmail ------------------------------------------
 
-def build_reply(original, reply_text):
+def build_reply(original, sender, reply_text):
     reply = EmailMessage()
     subject = original.get("Subject", "") or ""
     if not subject.lower().startswith("re:"):
         subject = "Re: " + subject
     reply["From"] = GMAIL_ADDRESS
-    reply["To"] = ALLOWED_SENDER
+    reply["To"] = sender
     reply["Subject"] = subject
     reply["Date"] = formatdate(localtime=True)
     reply["Message-ID"] = make_msgid(domain="gmail.com")
@@ -270,7 +276,8 @@ def poll_once(system_prompt, kb_text, start_ts, handled_ids):
         imap.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
         imap.select("INBOX")
 
-        query = f'"from:{ALLOWED_SENDER} -label:{DONE_LABEL} after:{start_ts}"'
+        senders = " OR ".join(ALLOWED_SENDERS)
+        query = f'"from:({senders}) -label:{DONE_LABEL} after:{start_ts}"'
         typ, data = imap.uid("SEARCH", "X-GM-RAW", query)
         if typ != "OK" or not data or not data[0]:
             return
@@ -283,7 +290,7 @@ def poll_once(system_prompt, kb_text, start_ts, handled_ids):
 
             # Double-check the actual sender address (not just a name match)
             sender = parseaddr(str(msg.get("From", "")))[1].lower()
-            if sender != ALLOWED_SENDER:
+            if sender not in ALLOWED_SENDERS:
                 continue
 
             msg_id = msg.get("Message-ID", f"uid-{uid.decode()}")
@@ -292,12 +299,12 @@ def poll_once(system_prompt, kb_text, start_ts, handled_ids):
 
             subject = str(msg.get("Subject", ""))
             body = get_body(msg)
-            log(f"New email: {subject!r}")
+            log(f"New email from {sender}: {subject!r}")
 
             category, reply_text = decide_reply(system_prompt, kb_text, subject, body)
             log(f"  -> {category}: {reply_text}")
 
-            reply = build_reply(msg, reply_text)
+            reply = build_reply(msg, sender, reply_text)
             if SEND_MODE == "send":
                 send_reply(reply)
                 log("  sent")
@@ -315,9 +322,13 @@ def poll_once(system_prompt, kb_text, start_ts, handled_ids):
 
 def preflight():
     problems = []
-    if not GMAIL_ADDRESS or not GMAIL_APP_PASSWORD or not ALLOWED_SENDER:
-        problems.append("Set GMAIL_ADDRESS, GMAIL_APP_PASSWORD, and ALLOWED_SENDER in .env "
+    if not GMAIL_ADDRESS or not GMAIL_APP_PASSWORD or not ALLOWED_SENDERS:
+        problems.append("Set GMAIL_ADDRESS, GMAIL_APP_PASSWORD, and ALLOWED_SENDERS in .env "
                         "(copy .env.example to .env and fill it in).")
+    bad = [a for a in ALLOWED_SENDERS if not re.fullmatch(r"[^\s@\"\\()]+@[^\s@\"\\()]+", a)]
+    if bad:
+        problems.append(f"ALLOWED_SENDERS has invalid address(es): {', '.join(bad)}. "
+                        "Use plain addresses separated by commas.")
     if not KNOWLEDGE_BASE_FILE.exists():
         problems.append(f"Missing {KNOWLEDGE_BASE_FILE.name} next to this script.")
     if SEND_MODE not in ("draft", "send"):
@@ -344,7 +355,8 @@ def main():
     handled_ids = set()
 
     log(f"Email agent running. Model={COHERE_MODEL}, mode={SEND_MODE}, "
-        f"watching for emails from {ALLOWED_SENDER} every {POLL_SECONDS}s. Ctrl+C to stop.")
+        f"watching for emails from {', '.join(ALLOWED_SENDERS)} every {POLL_SECONDS}s. "
+        "Ctrl+C to stop.")
 
     while True:
         try:

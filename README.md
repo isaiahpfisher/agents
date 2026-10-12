@@ -2,7 +2,7 @@
 
 Answers course questions sent to a Gmail inbox, using only the facts in `knowledge_base.txt` and a Cohere model called through the Cohere API. No Python packages to install.
 
-For each new email from the allowed sender, the agent replies with one of:
+For each new email from an allowed sender, the agent replies with one of:
 
 | Situation | Reply |
 | --- | --- |
@@ -28,12 +28,12 @@ For each new email from the allowed sender, the agent replies with one of:
 
    - `GMAIL_ADDRESS`: the inbox the agent watches and replies from
    - `GMAIL_APP_PASSWORD`: a Gmail app password (Google Account > Security > App passwords), not your normal password
-   - `ALLOWED_SENDER`: the only address the agent will answer
+   - `ALLOWED_SENDERS`: the only addresses the agent will answer, separated by commas (e.g. `a@example.com,b@example.com`)
    - `COHERE_API_KEY`: your Cohere API key
 
    `.env` is listed in `.gitignore`. Never commit it.
 
-Each email from the allowed sender, along with the whole knowledge base, is sent to Cohere to be classified and answered.
+Each email from an allowed sender, along with the whole knowledge base, is sent to Cohere to be classified and answered.
 
 ## Running
 
