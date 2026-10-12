@@ -1,6 +1,6 @@
 # Email Agent
 
-Answers course questions sent to a Gmail inbox, using only the facts in `knowledge_base.txt` and a local Ollama model. No paid APIs, and no Python packages to install.
+Answers course questions sent to a Gmail inbox, using only the facts in `knowledge_base.txt` and a Cohere model called through the Cohere API. No Python packages to install.
 
 For each new email from the allowed sender, the agent replies with one of:
 
@@ -13,38 +13,27 @@ For each new email from the allowed sender, the agent replies with one of:
 ## Requirements
 
 - Python 3
-- [Ollama](https://ollama.com), installed and running
+- A [Cohere API key](https://dashboard.cohere.com/api-keys) (a free trial key works, with rate limits)
 - A Gmail account with 2-Step Verification turned on (needed to create an app password)
 
 ## Setup
 
-1. Pull the base model:
-
-   ```
-   ollama pull qwen2.5:3b
-   ```
-
-2. Create your `.env` file:
+1. Create your `.env` file:
 
    ```
    cp .env.example .env
    ```
 
-   Then fill it in:
+2. Fill it in:
 
    - `GMAIL_ADDRESS`: the inbox the agent watches and replies from
    - `GMAIL_APP_PASSWORD`: a Gmail app password (Google Account > Security > App passwords), not your normal password
    - `ALLOWED_SENDER`: the only address the agent will answer
+   - `COHERE_API_KEY`: your Cohere API key
 
    `.env` is listed in `.gitignore`. Never commit it.
 
-3. Build the agent's model:
-
-   ```
-   python3 build_model.py
-   ```
-
-   This copies `knowledge_base.txt` into the `Modelfile`'s system prompt and creates an Ollama model named `email-agent`.
+Each email from the allowed sender, along with the whole knowledge base, is sent to Cohere to be classified and answered.
 
 ## Running
 
@@ -65,22 +54,15 @@ Answered emails get the Gmail label `AutoReplied` so they are never answered twi
 ## Changing the knowledge base or prompt
 
 - Facts the agent can use: edit `knowledge_base.txt`.
-- Instructions for the model: edit the `SYSTEM` block in `Modelfile`. Leave the `KNOWLEDGE BASE:` / `<<<` / `>>>` lines in place; `build_model.py` overwrites whatever is between them.
+- Instructions for the model: edit `SYSTEM_PROMPT_TEMPLATE` in `email_agent.py`.
+- Which Cohere model is used: set `COHERE_MODEL` in `.env` (default `command-a-plus-05-2026`).
 
-After either change, rebuild:
-
-```
-python3 build_model.py
-```
-
-If the model is out of date with `knowledge_base.txt`, the agent refuses to start and tells you to rebuild.
+Restart the agent to pick up any of these changes.
 
 ## Files
 
 | File | Purpose |
 | --- | --- |
-| `email_agent.py` | The agent: reads Gmail, asks the model, replies |
-| `Modelfile` | Base model, settings, and system prompt for `email-agent` |
-| `build_model.py` | Rebuilds `email-agent` from the Modelfile and knowledge base |
+| `email_agent.py` | The agent: reads Gmail, asks the Cohere model, replies |
 | `knowledge_base.txt` | The only facts the agent may use |
 | `.env.example` | Template for your `.env` |
